@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="UTF-8">
+  <head>
+    <title>Fast Form Filler Movistar</title>
+    <style>
+      
+      body { 
+        font-family: Arial, 
+        sans-serif; 
+        width: 300px;
+      }
+      .button { margin: 5px 0; padding: 8px; background-color: #007bff; color: white; border: none; cursor: pointer; }
+      .group-form { margin-bottom: 15px; }
+      .icon-button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+      }
+      .icon-button img {
+        width: 16px;
+        height: 16px;
+      }
+      .title-popup{
+        text-align: center;
+        font-size: 1.5rem;
+      }
+    </style>
+    <!-- cargar boostrap 4.6 cdn -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container-fluid p-0 m-0">
+      <div class="row p-0 m-0">
+        <div class="col-12 p-0 m-0">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="title-popup">Datos de prueba</h2>
+            </div>
+            <div class="card-body">
+                <div id="groups" class="row"></div> <!-- Aquí se mostrarán los grupos existentes -->
+            </div>
+            <div class="card-footer">
+
+              <button id="openInTab" class="btn btn-success">Configurar grupos</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

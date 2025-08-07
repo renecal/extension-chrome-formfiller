@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fast Form Filler Movistar</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!--  SweetAlert -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+  <style>
+    /* reset */
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    /* box sizing */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    .edit-button, .delete-button {
+      padding: 3px 8px;
+    }
+
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 0;
+    }
+
+    .card-title {
+      margin: 0 !important;
+    }
+
+    .card-body-group {
+      gap: 10px;
+    }
+
+    .label-match {
+      font-size: 0.8rem;
+      color: green;
+    }
+
+    .content-header{
+      gap: 20px;
+    }
+  </style>
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   <!-- SweetAlert js --> 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+
+  <div class="container my-5">
+    <div class="row pb-5">
+      <div class="col-12">
+        <h2 class="text-center">Fast Form Filler Movistar</h2>
+        <div id="messageSuccessSave" class="text-center my-3">
+        </div>
+      </div>
+    </div>
+    <div class="row pb-3">
+
+      <div class="col-6">
+        <div class="row">
+          <div class="card w-100">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-12">
+                  <div class="content-header d-flex justify-content-between">
+                    <h3>Agregar/Editar Grupo</h3>
+                    <button id="btnNewGroup" class="btn btn-success">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body" id="card-body-form" style="display: none;">
+              <div class="row">
+                <div class="col-12">
+                  <div id="messageErrorForm">
+
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="group-form">
+                    <form id="formGroupData ">
+                      <div class="form-group row mb-3">
+                        <div class="col-12">
+                          <label for="id_contenedor_grupo">ID contenedor de botones (opcional):</label>
+                          <input type="text" id="id_contenedor_grupo" class="form-control" placeholder="Ej: miModalFormContainer">
+                        </div>
+                      </div>
+                      <div class="form-group row my-3">
+                        <div class="col-12">
+                          <label for="groupName">Nombre del grupo:</label>
+                          <input type="text" id="groupName" class="form-control" placeholder="Nombre del grupo">
+                        </div>
+                      </div>
+                      <div class="form-group row mb-3">
+                        <div class="col-12">
+                          <label for="groupUrl">URL asociada (opcional):</label>
+                          <input type="text" id="groupUrl" class="form-control" placeholder="https://ejemplo.com/pagina">
+                        </div>
+                      </div>
+
+                      <div class="form-group row mb-4">
+                        <div class="col-6">
+                          <label for="rut">RUT:</label>
+                          <input type="text" id="rut" class="form-control" placeholder="12.345.678-9">
+                        </div>
+                        <div class="col-6">
+                          <label class="label-match" for="rut_attributes">name match (separados por |):</label>
+                          <input class="form-control" type="text" id="rut_attributes" name="rut_attributes"
+                            placeholder="rut" value="rut">
+                        </div>
+                      </div>
+                      <div class="form-group row mb-4">
+                        <div class="col-6">
+                          <label for="email">Email:</label>
+                          <input type="email" id="email" class="form-control" placeholder="test@test.cl"
+                            value="test@test.cl">
+                        </div>
+                        <div class="col-6">
+                          <label class="label-match" for="email_attributes">name match (separados por |):</label>
+                          <input class="form-control" type="text" id="email_attributes" name="email_attributes"
+                            value="email|correo" placeholder="email">
+                        </div>
+                      </div>
+
+                      <div class="form-group row mb-4">
+                        <div class="col-6">
+                          <label for="phone">Teléfono:</label>
+                          <input type="number" id="phone" class="form-control" placeholder="912345678">
+                        </div>
+                        <div class="col-6">
+                          <label class="label-match" for="phone_attributes">name match (separados por |):</label>
+                          <input class="form-control" type="text" id="phone_attributes" name="phone_attributes"
+                            value="phone|telefono|linea|contacto" placeholder="telefono">
+                        </div>
+                      </div>
+                      <button id="saveGroup" type="submit" class="btn btn-primary">Guardar Grupo</button>
+                      <div id="errorMessage" class="mt-3"></div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div id="groups" class="row "></div> <!-- Aquí se mostrarán los grupos existentes -->
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex justify-content-between">
+          <button class="btn btn-secondary" id="exportCSV">Exportar grupos a csv</button>
+          <div class="form-group">
+            <label for="exampleFormControlFile1">Importar</label>
+            <input type="file" class="form-control-file" id="importCSV">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+  
+  <script src="options.js"></script>
+</body>
+
+</html>
